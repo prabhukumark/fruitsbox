@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NF Fruits Bowl Box</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="fade-in">🌟 NF Fruits Bowl Box 🌟</h1>
+      <p class="offer slide-in">🎉 First 50 Members @ ₹1499/month 🎉</p>
+    </header>
+
+    <button class="book-btn bounce" onclick="showPayment()">📦 Book Now</button>
+
+    <div id="payment-section" class="payment-popup">
+      <h2>Payment Options</h2>
+      <p><strong>Paytm UPI ID:</strong> kprabhukumar594@axl</p>
+      <canvas id="paytm-qr" width="120" height="120"></canvas>
+      <p><strong>Bank Account:</strong> 34683575809 | IFSC: SBIN0003173</p>
+      <p><strong>Alternate UPI:</strong> kprabhukumar594@ybl</p>
+
+      <h3>After Payment, Fill This Form:</h3>
+      <form id="detailsForm" onsubmit="sendWhatsApp(); return false;">
+        <input type="text" id="name" placeholder="Your Name" required><br>
+        <input type="tel" id="phone" placeholder="Your Phone Number" required><br>
+        <input type="text" id="paymentProof" placeholder="Payment Screenshot Link" required><br>
+        <button type="submit" class="submit-btn pulse">📩 Send Details</button>
+      </form>
+      <button class="close-btn" onclick="hidePayment()">❌ Close</button>
+    </div>
+  </div>
+
+  <script>
+    function showPayment() {
+      document.getElementById('payment-section').style.display = 'block';
+      var qr = new QRious({
+        element: document.getElementById('paytm-qr'),
+        value: 'kprabhukumar594@axl', // Your UPI ID or Payment Link
+        size: 120
+      });
+    }
+
+    function hidePayment() {
+      document.getElementById('payment-section').style.display = 'none';
+    }
+
+    function sendWhatsApp() {
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var paymentProof = document.getElementById('paymentProof').value;
+
+      var message = `New Booking:%0AName: ${name}%0APhone: ${phone}%0APayment Screenshot: ${paymentProof}`;
+      
+      window.open(`https://wa.me/919391112410?text=${message}`, '_blank');
+    }
+  </script>
+</body>
+</html>
