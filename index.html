@@ -2,61 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NF Fruits Bowl Box</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 </head>
 <body>
+  <div class="banner">
+    <marquee behavior="scroll" direction="left" scrollamount="5">
+      Start your day fresh and healthy! 🍎🥗 Delivery Monday to Saturday, 6-7 AM 🌞
+    </marquee>
+  </div>
+
   <div class="container">
-    <header>
-      <h1 class="fade-in">🌟 NF Fruits Bowl Box 🌟</h1>
-      <p class="offer slide-in">🎉 First 50 Members @ ₹1499/month 🎉</p>
-    </header>
+    <h1>NF Fruits Bowl Box</h1>
+    <p>First 50 Members ₹1499/month</p>
 
-    <button class="book-btn bounce" onclick="showPayment()">📦 Book Now</button>
-
-    <div id="payment-section" class="payment-popup">
-      <h2>Payment Options</h2>
-      <p><strong>Paytm UPI ID:</strong> kprabhukumar594@axl</p>
-      <canvas id="paytm-qr" width="120" height="120"></canvas>
-      <p><strong>Bank Account:</strong> 34683575809 | IFSC: SBIN0003173</p>
-      <p><strong>Alternate UPI:</strong> kprabhukumar594@ybl</p>
-
-      <h3>After Payment, Fill This Form:</h3>
-      <form id="detailsForm" onsubmit="sendWhatsApp(); return false;">
-        <input type="text" id="name" placeholder="Your Name" required><br>
-        <input type="tel" id="phone" placeholder="Your Phone Number" required><br>
-        <input type="text" id="paymentProof" placeholder="Payment Screenshot Link" required><br>
-        <button type="submit" class="submit-btn pulse">📩 Send Details</button>
-      </form>
-      <button class="close-btn" onclick="hidePayment()">❌ Close</button>
-    </div>
+    <form id="orderForm">
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+      <textarea id="address" name="address" placeholder="Delivery Address" required></textarea>
+      <button type="submit">Book Now</button>
+    </form>
   </div>
 
   <script>
-    function showPayment() {
-      document.getElementById('payment-section').style.display = 'block';
-      var qr = new QRious({
-        element: document.getElementById('paytm-qr'),
-        value: 'kprabhukumar594@axl', // Your UPI ID or Payment Link
-        size: 120
-      });
-    }
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-    function hidePayment() {
-      document.getElementById('payment-section').style.display = 'none';
-    }
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
 
-    function sendWhatsApp() {
-      var name = document.getElementById('name').value;
-      var phone = document.getElementById('phone').value;
-      var paymentProof = document.getElementById('paymentProof').value;
+      const message = `New Order!%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}`;
+      const whatsappNumber = '919391112410'; // Your WhatsApp number with country code
 
-      var message = `New Booking:%0AName: ${name}%0APhone: ${phone}%0APayment Screenshot: ${paymentProof}`;
-      
-      window.open(`https://wa.me/919391112410?text=${message}`, '_blank');
-    }
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    });
   </script>
 </body>
 </html>
